@@ -2,10 +2,10 @@ apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
   name: se-latam-idp-demo
-  description: kubernetes cluster
+  description: kubernetes cluster for gentera-demo organization to test services on staging environment
   links:
     - url: https://34.70.63.241
-      title: se-latam-idp-demo
+      title: https://34.70.63.241
       icon: dashboard
       type: kubernetes-cluster                                      
 spec:
