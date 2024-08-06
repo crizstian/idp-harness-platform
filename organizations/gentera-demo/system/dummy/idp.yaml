@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+spec:
+  owner: cristian.ramirez@harness.io
+  domain: gentera-demo
+metadata:
+  name: dummy
+  description: A Harness project as example test
+  tags: []

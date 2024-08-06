@@ -1,0 +1,19 @@
+kind: Component
+spec:
+  type: Service
+  lifecycle: staging
+  owner: cristian.ramirez@harness.io
+  system: dummy
+apiVersion: backstage.io/v1alpha1
+metadata:
+  name: guestbook
+  description: Descripcion de un componente tipo servicio
+  links:
+    - url: http://34.135.60.81/
+      title: staging website
+      icon: dashboard
+      type: Boutique FrontEnd
+  tags: 
+    - go
+  annotations:
+    github.com/project-slug: crizstian/argocd-example-apps

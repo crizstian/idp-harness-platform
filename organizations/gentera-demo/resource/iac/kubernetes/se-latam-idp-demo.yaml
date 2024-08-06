@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: se-latam-idp-demo
+  description: kubernetes cluster
+  links:
+    - url: 34.70.63.241
+      title: se-latam-idp-demo
+      icon: dashboard
+      type: kubernetes-cluster                                      
+spec:
+  type: kubernetes-cluster
+  owner: cristian.ramirez@harness.io
+  system: gentera-demo-iac
