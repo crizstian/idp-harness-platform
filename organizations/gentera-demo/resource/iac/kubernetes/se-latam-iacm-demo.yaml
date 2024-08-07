@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: se-latam-idp-demo
+  description: kubernetes cluster for gentera-demo organization to test services on staging environment
+  links:
+    - url: https://34.70.63.241
+      title: https://34.70.63.241
+      icon: dashboard
+      type: kubernetes-cluster
+  annotations:
+    harness.io/workspace-url: |
+      terraformawss3staticwebsitedev: https://app.harness.io/ng/account/Io9SR1H7TtGBq9LVyJVB2w/module/iacm/orgs/genterademo/projects/iac/workspaces/terraformawss3staticwebsitedev/resources
+spec:
+  type: kubernetes-cluster
+  owner: cristian.ramirez@harness.io
+  system: gentera-demo-iac
