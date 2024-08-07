@@ -13,6 +13,6 @@ metadata:
       title: crisdemo
       icon: dashboard
       type: s3-bucket
-annotations:
-  harness.io/workspace-url: |
-    terraformawss3staticwebsitedev: https://app.harness.io/ng/account/Io9SR1H7TtGBq9LVyJVB2w/module/iacm/orgs/genterademo/projects/iac/workspaces/terraformawss3staticwebsitedev/resources
+  annotations:
+    harness.io/workspace-url: |
+      terraformawss3staticwebsitedev: https://app.harness.io/ng/account/Io9SR1H7TtGBq9LVyJVB2w/module/iacm/orgs/genterademo/projects/iac/workspaces/terraformawss3staticwebsitedev/resources
