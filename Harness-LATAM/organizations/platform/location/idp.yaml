@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: idp-harness-platform
+spec:
+  owner: cristian.ramirez@harness.io
+  type: url
+  targets:
+    - https://github.com/crizstian/idp-harness-platform/blob/main/Harness-LATAM/organizations/platform/domain/idp.yaml
+    - https://github.com/crizstian/idp-harness-platform/blob/main/Harness-LATAM/organizations/platform/project/idp.yaml
+    - https://github.com/crizstian/idp-harness-platform/blob/main/Harness-LATAM/organizations/platform/workflow/onboarding/organization.yaml
