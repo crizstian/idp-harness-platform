@@ -58,13 +58,19 @@ spec:
         repositoryConnector:
           title: Git Connector
           type: string
-          description: git connector
+          description: connector to fetch tfvars from internal/external repo
           enum: ["platformgitops"]
           default: platformgitops
         moduleConnector:
           title: Git Connector
           type: string
-          description: git connector
+          description: connector to fetch cloud-components/harness-components terraform modules
+          enum: ["GetFlow"]
+          default: GetFlow
+        idpConnector:
+          title: Git Connector
+          type: string
+          description: connector to configure/use IDP pipeline steps
           enum: ["idpgitconnector"]
           default: idpgitconnector
         template:
@@ -112,6 +118,7 @@ spec:
           bucket: ${{ parameters.bucket }}
           repositoryConnector: ${{ parameters.repositoryConnector }}
           moduleConnector: ${{ parameters.moduleConnector }}
+          idpConnector: ${{ parameters.idpConnector }}
           template: ${{ parameters.template }}
           platformRepo: ${{ parameters.platformRepo }}
           gitOrganization: ${{ parameters.gitOrganization }}
