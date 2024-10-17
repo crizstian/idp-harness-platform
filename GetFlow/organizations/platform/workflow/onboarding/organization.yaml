@@ -65,8 +65,8 @@ spec:
           title: Git Connector
           type: string
           description: git connector
-          enum: ["GetFlow"]
-          default: GetFlow
+          enum: ["idpgitconnector"]
+          default: idpgitconnector
         template:
           title: Git Connector
           type: string
