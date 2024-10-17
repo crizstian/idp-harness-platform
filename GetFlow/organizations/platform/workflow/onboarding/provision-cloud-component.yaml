@@ -101,6 +101,30 @@ spec:
                       description: git connector
                       enum: ["platformgitops"]
                       default: platformgitops
+                    moduleConnector:
+                      title: Git Connector
+                      type: string
+                      description: connector to fetch cloud-components/harness-components terraform modules
+                      enum: ["GetFlow"]
+                      default: GetFlow
+                    idpConnector:
+                      title: Git Connector
+                      type: string
+                      description: connector to configure/use IDP pipeline steps
+                      enum: ["idpgitconnector"]
+                      default: idpgitconnector
+                    platformRepo:
+                      title: Git Connector
+                      type: string
+                      description: git connector
+                      enum: ["platform-gitops"]
+                      default: platform-gitops
+                    gitOrganization:
+                      title: Git Connector
+                      type: string
+                      description: git connector
+                      enum: ["getflow-sh", "crizstian"]
+                      default: getflow-sh
                     tfvars:
                       title: TFVARS file name
                       type: string
@@ -335,6 +359,10 @@ spec:
           workspace_id: ${{ parameters.modulecomponent.cloudcomponent }}/${{ parameters.modulecomponent.Operationtype.tfvars }}
           branch: ${{ parameters.modulecomponent.Operationtype.branch }}
           repositoryConnector: ${{ parameters.modulecomponent.Operationtype.repositoryconnector }}
+          moduleConnector: ${{ parameters.modulecomponent.Operationtype.moduleConnector }}
+          idpConnector: ${{ parameters.modulecomponent.Operationtype.idpConnector }}
+          platformRepo: ${{ parameters.modulecomponent.Operationtype.platformRepo }}
+          gitOrganization: ${{ parameters.modulecomponent.Operationtype.gitOrganization }}
           backendType: ${{ parameters.backendtype.backend }}
           bucket: ${{ parameters.backendtype.bucket }}
           backendRegion: ${{ parameters.backendtype.backendRegion }}
