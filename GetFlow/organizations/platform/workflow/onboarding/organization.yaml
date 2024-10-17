@@ -61,6 +61,30 @@ spec:
           description: git connector
           enum: ["platformgitops"]
           default: platformgitops
+        moduleConnector:
+          title: Git Connector
+          type: string
+          description: git connector
+          enum: ["GetFlow"]
+          default: GetFlow
+        template:
+          title: Git Connector
+          type: string
+          description: git connector
+          enum: ["organization"]
+          default: organization
+        platformRepo:
+          title: Git Connector
+          type: string
+          description: git connector
+          enum: ["platform-gitops"]
+          default: platform-gitops
+        gitOrganization:
+          title: Git Connector
+          type: string
+          description: git connector
+          enum: ["getflow-sh", "crizstian"]
+          default: getflow-sh
         type:
           title: Terraform Action
           type: string
@@ -87,6 +111,10 @@ spec:
           backendRegion: ${{ parameters.backendRegion }}
           bucket: ${{ parameters.bucket }}
           repositoryConnector: ${{ parameters.repositoryConnector }}
+          moduleConnector: ${{ parameters.moduleConnector }}
+          template: ${{ parameters.template }}
+          platformRepo: ${{ parameters.platformRepo }}
+          gitOrganization: ${{ parameters.gitOrganization }}
           type: ${{ parameters.type }}
         apikey: ${{ parameters.token }}
 
