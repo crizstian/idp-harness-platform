@@ -1,0 +1,3 @@
+helm repo add gitops-agent https://harness.github.io/gitops-helm/
+helm repo update gitops-agent
+helm install argocd gitops-agent/gitops-helm --values override.yaml --namespace default

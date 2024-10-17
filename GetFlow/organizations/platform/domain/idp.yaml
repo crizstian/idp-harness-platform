@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+spec:
+  owner: cristian.ramirez@harness.io
+metadata:
+  name: platform
+  description: Platform Organization to bootstrap and onboard resources into harness
+  tags: []
+  links:
+    - url: https://app.harness.io/ng/account/cbwZLIifQRuvfAEoXOwLdA/home/orgs/platform/details
+      title: Platform Organization
+      icon: dashboard
+      type: Platform Organization
+# USERS AND GROUPS ARE MAPPED AND MANAGED BY HARNESS RBAC SETTINGS

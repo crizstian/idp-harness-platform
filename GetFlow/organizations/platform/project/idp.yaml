@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+spec:
+  owner: cristian.ramirez@harness.io
+  domain: platform
+metadata:
+  name: bootstrap
+  description: "Project for bootstrapping processes"
+  tags: []
