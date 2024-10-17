@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+spec:
+  owner: cristian.ramirez@harness.io
+metadata:
+  name: sarlanga
+  description: sarlanga organization
+  tags: []
+  links:
+    - url: https://app.harness.io/ng/account/Io9SR1H7TtGBq9LVyJVB2w/home/orgs/sarlanga/details
+      title: sarlanga
+      icon: dashboard
+      type: sarlanga

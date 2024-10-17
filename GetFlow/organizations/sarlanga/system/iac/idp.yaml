@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+spec:
+  owner: cristian.ramirez@harness.io
+  domain: sarlanga
+metadata:
+  name: sarlanga-iac
+  description: sarlanga IaC project to build and deploy infrastructure as code resources
+  tags: []
