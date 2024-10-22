@@ -89,12 +89,14 @@ spec:
                         - project
                       ui:autofocus: true
                     branch:
-                      title: Select Template Version
                       type: string
-                      enum:
-                        - v0.2.0
-                      default: v0.2.0
-                      ui:autofocus: true
+                      ui:field: SelectFieldFromApi
+                      ui:options:
+                        title: boostrap provisioning tag
+                        description: terraform module provisioner tag
+                        placeholder: "Choose module version"
+                        path: proxy/github-api/repos/getflow-sh/terraform-harness-platform/tags
+                        valueSelector: name
                     repositoryconnector:
                       title: Git Connector
                       type: string

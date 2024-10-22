@@ -26,11 +26,14 @@ spec:
           type: string
           description: name of the org to onbaord
         branch:
-          title: boostrap provisioning tag
           type: string
-          description: terraform module provisioner tag
-          enum: ["v0.1.2"]
-          default: v0.1.2
+          ui:field: SelectFieldFromApi
+          ui:options:
+            title: boostrap provisioning tag
+            description: terraform module provisioner tag
+            placeholder: "Choose module version"
+            path: proxy/github-api/repos/getflow-sh/terraform-harness-platform/tags
+            valueSelector: name
         providerConnector:
           title: Provider Connector
           type: string
