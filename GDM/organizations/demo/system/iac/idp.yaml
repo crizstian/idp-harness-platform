@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+spec:
+  owner: cristian.ramirez@harness.io
+  domain: demo
+metadata:
+  name: demo-iac
+  description: demo IaC project to build and deploy infrastructure as code resources
+  tags: []
