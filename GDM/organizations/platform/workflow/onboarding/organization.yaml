@@ -1,0 +1,131 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: platform-bootstrap
+  title: Create Harness Component
+  description: provision an organization
+  tags:
+    - organization
+spec:
+  owner: cristian.ramirez@harness.io
+  system: bootstrap
+  type: service
+  parameters:
+    - title: Harness Organization Details
+      required:
+        - newOrganization
+        - branch
+        - providerConnector
+        - backendType
+        - bucket
+        - repositoryConnector
+        - type
+      properties:
+        newOrganization:
+          title: Organization name
+          type: string
+          description: name of the org to onbaord
+        branch:
+          title: boostrap provisioning tag
+          type: string
+          description: terraform module provisioner tag
+          enum: ["v0.2.0"]
+          default: v0.2.0
+        providerConnector:
+          title: Provider Connector
+          type: string
+          description: Cloud Provider Connector for terraform state
+          enum: ["CRISTIANGCP"]
+          default: CRISTIANGCP
+        backendType:
+          title: Backend Type
+          type: string
+          description: terraform backend type
+          enum: ["gcs"]
+          default: gcs
+        backendRegion:
+          title: Backend Region
+          type: string
+          description: terraform backend region
+          enum: ["global"]
+          default: "global"
+        bucket:
+          title: Terraform State Bucket
+          type: string
+          description: terraform bucket to store tf states
+          enum: ["crizstian-terraform"]
+          default: crizstian-terraform
+        repositoryConnector:
+          title: Git Connector
+          type: string
+          description: connector to fetch tfvars from internal/external repo
+          enum: ["platformgitops"]
+          default: platformgitops
+        moduleConnector:
+          title: Git Connector
+          type: string
+          description: connector to fetch cloud-components/harness-components terraform modules
+          enum: ["GetFlow"]
+          default: GetFlow
+        idpConnector:
+          title: Git Connector
+          type: string
+          description: connector to configure/use IDP pipeline steps
+          enum: ["idpgitconnector"]
+          default: idpgitconnector
+        template:
+          title: Git Connector
+          type: string
+          description: git connector
+          enum: ["organization"]
+          default: organization
+        platformRepo:
+          title: Git Connector
+          type: string
+          description: git connector
+          enum: ["platform-gitops"]
+          default: platform-gitops
+        gitOrganization:
+          title: Git Connector
+          type: string
+          description: git connector
+          enum: ["getflow-sh", "crizstian"]
+          default: getflow-sh
+        type:
+          title: Terraform Action
+          type: string
+          description: Terraform instruction for this workflow
+          enum: ["apply", "destroy"]
+          default: apply
+        # This field is hidden but needed to authenticate the request to trigger the pipeline
+        token:
+          title: Harness Token
+          type: string
+          ui:widget: password
+          ui:field: HarnessAuthToken
+  steps:
+    - id: trigger
+      name: Onboarding harness organization process
+      action: trigger:harness-custom-pipeline
+      input:
+        url: "https://app.harness.io/ng/account/<+account.identifier>/all/orgs/platform/projects/bootstrap/pipelines/workspace/pipeline-studio?storeType=INLINE"
+        inputset:
+          newOrganization: ${{ parameters.newOrganization }}
+          branch: ${{ parameters.branch }}
+          providerConnector: ${{ parameters.providerConnector }}
+          backendType: ${{ parameters.backendType }}
+          backendRegion: ${{ parameters.backendRegion }}
+          bucket: ${{ parameters.bucket }}
+          repositoryConnector: ${{ parameters.repositoryConnector }}
+          moduleConnector: ${{ parameters.moduleConnector }}
+          idpConnector: ${{ parameters.idpConnector }}
+          template: ${{ parameters.template }}
+          platformRepo: ${{ parameters.platformRepo }}
+          gitOrganization: ${{ parameters.gitOrganization }}
+          type: ${{ parameters.type }}
+        apikey: ${{ parameters.token }}
+
+  output:
+    links:
+      - title: Pipeline Details
+        url: ${{ steps.trigger.output.PipelineUrl }}

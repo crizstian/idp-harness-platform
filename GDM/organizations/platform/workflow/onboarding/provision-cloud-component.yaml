@@ -1,0 +1,375 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: provision-cloud-component
+  title: Provision Cloud Component
+  description: provision cloud component for a given organization
+  tags:
+    - harness
+    - aws
+    - gcp
+spec:
+  owner: cristian.ramirez@harness.io
+  system: bootstrap
+  type: service
+  parameters:
+    - title: Select Cloud Component
+      description: cloud component to be provisioned
+      type: object
+      properties:
+        token:
+          title: Harness Token
+          type: string
+          ui:widget: password
+          ui:field: HarnessAuthToken
+        organization_id:
+          title: Select Organization
+          type: string
+          ui:field: HarnessOrgPicker
+        modulecomponent:
+          title: ""
+          type: object
+          properties:
+            cloudcomponent:
+              title: Cloud Component
+              type: string
+              enum:
+                - terraform-harness-platform
+                - terraform-gcp-gke
+                - terraform-gcp-cloud-sql
+                - terraform-aws-s3
+          required:
+            - cloudcomponent
+          dependencies:
+            cloudcomponent:
+              oneOf:
+                - properties:
+                    cloudcomponent:
+                      enum:
+                        - terraform-harness-platform
+                    Operationtype:
+                      $ref: "#/terraformharnessplatform/operation"
+                - properties:
+                    cloudcomponent:
+                      enum:
+                        - terraform-gcp-gke
+                    Operationtype:
+                      $ref: "#/terraform-gcp-gke/operation"
+                - properties:
+                    cloudcomponent:
+                      enum:
+                        - terraform-gcp-cloud-sql
+                    Operationtype:
+                      $ref: "#/terraform-gcp-cloud-sql/operation"
+                - properties:
+                    cloudcomponent:
+                      enum:
+                        - terraform-aws-s3
+                    Operationtype:
+                      $ref: "#/terraform-aws-s3/operation"
+      terraformharnessplatform:
+        operation:
+          title: ""
+          type: object
+          properties:
+            template:
+              title: Select Harness Component
+              type: string
+              enum:
+                - project
+              ui:autofocus: true
+          required:
+            - template
+          dependencies:
+            template:
+              oneOf:
+                - properties:
+                    template:
+                      enum:
+                        - project
+                      ui:autofocus: true
+                    branch:
+                      title: Select Template Version
+                      type: string
+                      enum:
+                        - v0.2.0
+                      default: v0.2.0
+                      ui:autofocus: true
+                    repositoryconnector:
+                      title: Git Connector
+                      type: string
+                      description: git connector
+                      enum: ["platformgitops"]
+                      default: platformgitops
+                    moduleConnector:
+                      title: Git Connector
+                      type: string
+                      description: connector to fetch cloud-components/harness-components terraform modules
+                      enum: ["GetFlow"]
+                      default: GetFlow
+                    idpConnector:
+                      title: Git Connector
+                      type: string
+                      description: connector to configure/use IDP pipeline steps
+                      enum: ["idpgitconnector"]
+                      default: idpgitconnector
+                    platformRepo:
+                      title: Git Connector
+                      type: string
+                      description: git connector
+                      enum: ["platform-gitops"]
+                      default: platform-gitops
+                    gitOrganization:
+                      title: Git Connector
+                      type: string
+                      description: git connector
+                      enum: ["getflow-sh", "crizstian"]
+                      default: getflow-sh
+                    tfvars:
+                      title: TFVARS file name
+                      type: string
+                      description: tfvars file name to load values from
+                  required:
+                    - branch
+                    - repositoryconnector
+                    - tfvars
+      terraform-gcp-gke:
+        operation:
+          title: ""
+          type: object
+          properties:
+            template:
+              title: Select GCP Component
+              type: string
+              enum:
+                - private-cluster
+              ui:autofocus: true
+          required:
+            - template
+          dependencies:
+            template:
+              oneOf:
+                - properties:
+                    template:
+                      enum:
+                        - private-cluster
+                      ui:autofocus: true
+                    branch:
+                      title: Select Template Version
+                      type: string
+                      enum:
+                        - v0.1.1
+                      default: v0.1.1
+                      ui:autofocus: true
+                    repositoryconnector:
+                      title: Git Connector
+                      type: string
+                      description: git connector
+                      enum: ["platformgitops"]
+                      default: platformgitops
+                    tfvars:
+                      title: TFVARS file name
+                      type: string
+                      description: tfvars file name to load values from
+                  required:
+                    - branch
+                    - repositoryconnector
+                    - tfvars
+      terraform-gcp-cloud-sql:
+        operation:
+          title: ""
+          type: object
+          properties:
+            template:
+              title: Select GCP Component
+              type: string
+              enum:
+                - private-sql
+              ui:autofocus: true
+          required:
+            - template
+          dependencies:
+            template:
+              oneOf:
+                - properties:
+                    template:
+                      enum:
+                        - private-sql
+                      ui:autofocus: true
+                    branch:
+                      title: Select Template Version
+                      type: string
+                      enum:
+                        - v0.1.1
+                      default: v0.1.1
+                      ui:autofocus: true
+                    repositoryconnector:
+                      title: Git Connector
+                      type: string
+                      description: git connector
+                      enum: ["platformgitops"]
+                      default: platformgitops
+                    tfvars:
+                      title: TFVARS file name
+                      type: string
+                      description: tfvars file name to load values from
+                  required:
+                    - branch
+                    - repositoryconnector
+                    - tfvars
+      terraform-aws-s3:
+        operation:
+          title: ""
+          type: object
+          properties:
+            template:
+              title: Select AWS Component
+              type: string
+              enum:
+                - static-website
+              ui:autofocus: true
+          required:
+            - template
+          dependencies:
+            template:
+              oneOf:
+                - properties:
+                    template:
+                      enum:
+                        - static-website
+                      ui:autofocus: true
+                    branch:
+                      title: Select Template Version
+                      type: string
+                      enum:
+                        - v0.1.2
+                      default: v0.1.2
+                      ui:autofocus: true
+                    repositoryconnector:
+                      title: Git Connector
+                      type: string
+                      description: git connector
+                      enum: ["platformgitops"]
+                      default: platformgitops
+                    tfvars:
+                      title: TFVARS file name
+                      type: string
+                      description: tfvars file name to load values from
+                  required:
+                    - branch
+                    - repositoryconnector
+                    - tfvars
+    - title: Terraform Setup
+      properties:
+        backendtype:
+          type: object
+          properties:
+            backend:
+              title: Backend Type
+              type: string
+              enum:
+                - gcs
+                - s3
+          required:
+            - backend
+          dependencies:
+            backend:
+              oneOf:
+                - properties:
+                    backend:
+                      enum:
+                        - gcs
+                      ui:autofocus: true
+                    bucket:
+                      title: Terraform State Bucket
+                      type: string
+                      description: terraform bucket to store tf states
+                      enum:
+                        - crizstian-terraform
+                      default: crizstian-terraform
+                      ui:autofocus: true
+                    backendRegion:
+                      title: Backend Region
+                      type: string
+                      description: terraform backend region
+                      enum:
+                        - global
+                      default: global
+                    providerConnector:
+                      title: Provider Connector
+                      type: string
+                      description: Cloud Provider Connector for terraform state
+                      enum:
+                        - CRISTIANGCP
+                      default: CRISTIANGCP
+                  required:
+                    - bucket
+                    - providerConnector
+                    - backendRegion
+                - properties:
+                    backend:
+                      enum:
+                        - s3
+                      ui:autofocus: true
+                    bucket:
+                      title: Terraform State Bucket
+                      type: string
+                      description: terraform bucket to store tf states
+                      enum:
+                        - crizstian-terraform
+                      default: crizstian-terraform
+                      ui:autofocus: true
+                    backendRegion:
+                      title: Backend Region
+                      type: string
+                      description: terraform backend region
+                      enum:
+                        - us-east-1
+                      default: us-east-1
+                      ui:autofocus: true
+                    providerConnector:
+                      title: Provider Connector
+                      type: string
+                      description: Cloud Provider Connector for terraform state
+                      enum:
+                        - CRISTIANAWS
+                      default: CRISTIANAWS
+                      ui:autofocus: true
+                  required:
+                    - bucket
+                    - providerConnector
+                    - backendRegion
+        type:
+          title: Terraform Action
+          type: string
+          description: Terraform instruction for this workflow
+          enum:
+            - apply
+            - destroy
+          default: apply
+  steps:
+    - id: trigger
+      name: Provisioning Cloud Component
+      action: trigger:harness-custom-pipeline
+      input:
+        url: https://app.harness.io/ng/account/<+account.identifier>/module/iacm/orgs/${{ parameters.organization_id }}/projects/iac/pipelines/workspace/pipeline-studio?storeType=INLINE
+        inputset:
+          cloudComponent: ${{ parameters.modulecomponent.cloudcomponent }}
+          template: ${{ parameters.modulecomponent.Operationtype.template }}
+          workspace_id: ${{ parameters.modulecomponent.cloudcomponent }}/${{ parameters.modulecomponent.Operationtype.tfvars }}
+          branch: ${{ parameters.modulecomponent.Operationtype.branch }}
+          repositoryConnector: ${{ parameters.modulecomponent.Operationtype.repositoryconnector }}
+          moduleConnector: ${{ parameters.modulecomponent.Operationtype.moduleConnector }}
+          idpConnector: ${{ parameters.modulecomponent.Operationtype.idpConnector }}
+          platformRepo: ${{ parameters.modulecomponent.Operationtype.platformRepo }}
+          gitOrganization: ${{ parameters.modulecomponent.Operationtype.gitOrganization }}
+          backendType: ${{ parameters.backendtype.backend }}
+          bucket: ${{ parameters.backendtype.bucket }}
+          backendRegion: ${{ parameters.backendtype.backendRegion }}
+          providerConnector: ${{ parameters.backendtype.providerConnector }}
+          type: ${{ parameters.type }}
+        apikey: ${{ parameters.token }}
+  output:
+    links:
+      - title: Pipeline Details
+        url: ${{ steps.trigger.output.PipelineUrl }}
