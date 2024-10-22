@@ -91,9 +91,8 @@ spec:
                     branch:
                       title: Select Template Version
                       type: string
-                      enum:
-                        - v0.2.0
-                      default: v0.2.0
+                      enum: ["v0.1.2"]
+                      default: v0.1.2
                       ui:autofocus: true
                     repositoryconnector:
                       title: Git Connector

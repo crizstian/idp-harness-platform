@@ -29,8 +29,8 @@ spec:
           title: boostrap provisioning tag
           type: string
           description: terraform module provisioner tag
-          enum: ["v0.2.0"]
-          default: v0.2.0
+          enum: ["v0.1.2"]
+          default: v0.1.2
         providerConnector:
           title: Provider Connector
           type: string
